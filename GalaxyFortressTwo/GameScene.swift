@@ -8,6 +8,13 @@
 import SpriteKit
 import GameplayKit
 
+class TestComponent: GKComponent {
+    override func update(deltaTime seconds: TimeInterval) {
+        print(seconds)
+        return
+    }
+}
+
 class GameScene: SKScene {
     
     var entities = [GKEntity]()
@@ -16,10 +23,15 @@ class GameScene: SKScene {
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    private var testEntity : GKEntity?
     
     override func sceneDidLoad() {
 
         self.lastUpdateTime = 0
+        
+        self.testEntity = GKEntity()
+        self.testEntity?.addComponent(TestComponent())
+        self.entities.append(self.testEntity!)
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -40,6 +52,9 @@ class GameScene: SKScene {
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
         }
+        
+        let d6_1 = SKSpriteNode(imageNamed: "d6_1.png")
+        self.addChild(d6_1)
     }
     
     

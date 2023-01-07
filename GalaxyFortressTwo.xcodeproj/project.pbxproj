@@ -18,6 +18,10 @@
 		A20A14C72968F9580050B32D /* GalaxyFortressTwoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14C62968F9580050B32D /* GalaxyFortressTwoTests.swift */; };
 		A20A14D12968F9580050B32D /* GalaxyFortressTwoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14D02968F9580050B32D /* GalaxyFortressTwoUITests.swift */; };
 		A20A14D32968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14D22968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift */; };
+		A20A14E02968F9E20050B32D /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14DF2968F9E20050B32D /* GameState.swift */; };
+		A20A14E229690AB00050B32D /* d6_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A20A14E129690AB00050B32D /* d6_1.png */; };
+		A20A14E5296932100050B32D /* VisualComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14E4296932100050B32D /* VisualComponent.swift */; };
+		A20A14E729693A6A0050B32D /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14E629693A6A0050B32D /* MainGameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,10 @@
 		A20A14CC2968F9580050B32D /* GalaxyFortressTwoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GalaxyFortressTwoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20A14D02968F9580050B32D /* GalaxyFortressTwoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressTwoUITests.swift; sourceTree = "<group>"; };
 		A20A14D22968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressTwoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A20A14DF2968F9E20050B32D /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		A20A14E129690AB00050B32D /* d6_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = d6_1.png; path = ../../../../art/dice/d6_1.png; sourceTree = "<group>"; };
+		A20A14E4296932100050B32D /* VisualComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualComponent.swift; sourceTree = "<group>"; };
+		A20A14E629693A6A0050B32D /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,7 @@
 		A20A14A02968F9580050B32D = {
 			isa = PBXGroup;
 			children = (
+				A20A14E629693A6A0050B32D /* MainGameScene.swift */,
 				A20A14AB2968F9580050B32D /* GalaxyFortressTwo */,
 				A20A14C52968F9580050B32D /* GalaxyFortressTwoTests */,
 				A20A14CF2968F9580050B32D /* GalaxyFortressTwoUITests */,
@@ -102,11 +111,14 @@
 		A20A14AB2968F9580050B32D /* GalaxyFortressTwo */ = {
 			isa = PBXGroup;
 			children = (
+				A20A14E3296931E50050B32D /* Components */,
+				A20A14DF2968F9E20050B32D /* GameState.swift */,
 				A20A14AC2968F9580050B32D /* AppDelegate.swift */,
 				A20A14AE2968F9580050B32D /* GameScene.sks */,
 				A20A14B02968F9580050B32D /* Actions.sks */,
 				A20A14B22968F9580050B32D /* GameScene.swift */,
 				A20A14B42968F9580050B32D /* GameViewController.swift */,
+				A20A14E129690AB00050B32D /* d6_1.png */,
 				A20A14B62968F9580050B32D /* Main.storyboard */,
 				A20A14B92968F9580050B32D /* Assets.xcassets */,
 				A20A14BB2968F9580050B32D /* LaunchScreen.storyboard */,
@@ -129,6 +141,14 @@
 				A20A14D22968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift */,
 			);
 			path = GalaxyFortressTwoUITests;
+			sourceTree = "<group>";
+		};
+		A20A14E3296931E50050B32D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A20A14E4296932100050B32D /* VisualComponent.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +260,7 @@
 				A20A14BA2968F9580050B32D /* Assets.xcassets in Resources */,
 				A20A14BD2968F9580050B32D /* LaunchScreen.storyboard in Resources */,
 				A20A14B12968F9580050B32D /* Actions.sks in Resources */,
+				A20A14E229690AB00050B32D /* d6_1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +286,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A20A14B32968F9580050B32D /* GameScene.swift in Sources */,
+				A20A14E5296932100050B32D /* VisualComponent.swift in Sources */,
+				A20A14E02968F9E20050B32D /* GameState.swift in Sources */,
+				A20A14E729693A6A0050B32D /* MainGameScene.swift in Sources */,
 				A20A14B52968F9580050B32D /* GameViewController.swift in Sources */,
 				A20A14AD2968F9580050B32D /* AppDelegate.swift in Sources */,
 			);
