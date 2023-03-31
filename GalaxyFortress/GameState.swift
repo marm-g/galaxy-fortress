@@ -9,12 +9,18 @@ import GameplayKit
 
 
 typealias Roll = (Int, Int)
+enum RollChoice {
+    case combined, separate
+}
 
 
 class GameState: ObservableObject {
     var players: [Player]
     var lastRoll: (Int, Int) = (0, 0)
-    var activePlayer: Player?
+    // rollingPlayer is the player who is currently the "dice roller"
+    // activePlayer is the one who should be taking actions on the device
+    var rollingPlayer: Int!
+    var activePlayer: Int!
     
     func roll() {
         let dist = GKRandomDistribution.d6()
@@ -22,20 +28,44 @@ class GameState: ObservableObject {
     }
     
     func assignFirstPlayer() {
-        self.activePlayer = self.players.randomElement()!
+        self.rollingPlayer = self.players.randomElement()!
+        self.activePlayer = self.rollingPlayer
     }
     
     static func printRoll(r: Roll) -> String {
         return "(" + String(r.0) + "," + String(r.1) + ")"
     }
     
+    func doTurn (choice: RollChoice) {
+        let sector1 = activePlayer.cards[lastRoll.0 - 1]
+        // TODO(reno): Make these 'Equatable' so we can just do player == activePlayer
+        if activePlayer.name == rollingPlayer.name {
+            print(sector1?.activeCard.mainAction)
+        } else {
+            for card in sector1!.flippedCards {
+                print(card.flippedAction)
+            }
+        }
+        
+    }
+    
     init(players: [Player]) {
         // TODO(reno): error if players is empty
         self.players = players
     }
+    
+    init() {
+        let player1 = Player(name: "Player 1", cards: starterDeck)
+        let player2 = Player(name: "Player 2", cards: starterDeck)
+        self.players = []
+        self.players.append(player1)
+        self.players.append(player2)
+        self.assignFirstPlayer()
+    }
 }
 
 class Player {
+    var name: String!
     var credits = 0
     var income = 0
     var victoryPoints = 0
@@ -44,7 +74,8 @@ class Player {
     // cards for the "flipped" ones.
     var cards: [Int: Sector]
     
-    init(cards: [Int: Sector], credits: Int = 0, income: Int = 0, victoryPoints: Int = 0) {
+    init(name: String, cards: [Int: Sector], credits: Int = 0, income: Int = 0, victoryPoints: Int = 0) {
+        self.name = name
         self.credits = credits
         self.income = income
         self.victoryPoints = victoryPoints
@@ -148,6 +179,3 @@ let starterDeck = [
     11: Sector(active: starterCard11),
     12: Sector(active: starterCard12),
 ]
-
-let player1 = Player(cards: starterDeck)
-let player2 = Player(cards: starterDeck)

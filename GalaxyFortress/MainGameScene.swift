@@ -9,10 +9,10 @@ import SpriteKit
 import GameplayKit
 
 class MainGameScene: SKScene {
+    var state: GameState!
     var dice1: GKEntity!
     var dice2: GKEntity!
-    var dice1Result: Int = 1
-    var dice2Result: Int = 1
+    var currentPlayerLabel: GKEntity!
     var rollButton: GKEntity!
     var separateButton: GKEntity!
     var combinedButton: GKEntity!
@@ -31,6 +31,8 @@ class MainGameScene: SKScene {
     }
 
     func createSceneContents() {
+        state = GameState()
+        currentPlayerLabel = createTextLabel(text: "Current Player: " + state.activePlayer!.name, pos: CGPoint(x: 200, y: 650))
         dice1 = createDiceEntity(pos: CGPoint(x: 400, y: 500))
         dice2 = createDiceEntity(pos: CGPoint(x: 500, y: 500))
         // Adding them as entities, but the visual components won't get rendered until
@@ -67,26 +69,25 @@ class MainGameScene: SKScene {
     }
     
     func rollDice() {
-        let dist = GKRandomDistribution(forDieWithSideCount: 6)
-        dice1Result = dist.nextInt()
-        dice2Result = dist.nextInt()
-        print(dice1Result, dice2Result)
-        dice1.component(ofType: VisualComponent.self)?.changeSprite(imageName: "d6_" + String(dice1Result))
-        dice2.component(ofType: VisualComponent.self)?.changeSprite(imageName: "d6_" + String(dice2Result))
+        state.roll()
+        dice1.component(ofType: VisualComponent.self)?.changeSprite(imageName: "d6_" + String(state.lastRoll.0))
+        dice2.component(ofType: VisualComponent.self)?.changeSprite(imageName: "d6_" + String(state.lastRoll.1))
         return
     }
     
     func displayDiceChoiceButtons () {
-        let separateButtonText = String(format: "%d, %d", dice1Result, dice2Result)
-        let combinedButtonText = String(format: "%d", dice1Result + dice2Result)
+        let separateButtonText = String(format: "%d, %d", state.lastRoll.0, state.lastRoll.1)
+        let combinedButtonText = String(format: "%d", state.lastRoll.0 + state.lastRoll.1)
         let sepTextComponent = TextComponent(text: separateButtonText, pos: CGPoint(x: 400, y: 350))
         let combinedTextComponent = TextComponent(text: combinedButtonText, pos: CGPoint(x: 500, y: 350))
         let sepClickable = ClickableComponent(callback: {
+            self.state.doTurn(choice: .separate)
             print("separate numbers")
             self.hideDiceChoiceButtons()
         })
         let combinedClickable = ClickableComponent(callback: {
             print("combined numbers")
+            self.state.doTurn(choice: .combined)
             self.hideDiceChoiceButtons()
         })
         separateButton.addComponent(sepTextComponent)
@@ -145,5 +146,12 @@ class MainGameScene: SKScene {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("why must you make me do this")
+    }
+    
+    func createTextLabel(text: String, pos: CGPoint) -> GKEntity {
+        let newEntity = GKEntity()
+        newEntity.addComponent(TextComponent(text: text, pos: pos))
+        addChild(newEntity.component(ofType: TextComponent.self)!.label)
+        return newEntity
     }
 }
