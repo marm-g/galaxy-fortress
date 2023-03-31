@@ -15,9 +15,9 @@
 		A20A14B82968F9580050B32D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A20A14B62968F9580050B32D /* Main.storyboard */; };
 		A20A14BA2968F9580050B32D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20A14B92968F9580050B32D /* Assets.xcassets */; };
 		A20A14BD2968F9580050B32D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A20A14BB2968F9580050B32D /* LaunchScreen.storyboard */; };
-		A20A14C72968F9580050B32D /* GalaxyFortressTwoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14C62968F9580050B32D /* GalaxyFortressTwoTests.swift */; };
-		A20A14D12968F9580050B32D /* GalaxyFortressTwoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14D02968F9580050B32D /* GalaxyFortressTwoUITests.swift */; };
-		A20A14D32968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14D22968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift */; };
+		A20A14C72968F9580050B32D /* GalaxyFortressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14C62968F9580050B32D /* GalaxyFortressTests.swift */; };
+		A20A14D12968F9580050B32D /* GalaxyFortressUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14D02968F9580050B32D /* GalaxyFortressUITests.swift */; };
+		A20A14D32968F9580050B32D /* GalaxyFortressUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14D22968F9580050B32D /* GalaxyFortressUITestsLaunchTests.swift */; };
 		A20A14E02968F9E20050B32D /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14DF2968F9E20050B32D /* GameState.swift */; };
 		A20A14E5296932100050B32D /* VisualComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14E4296932100050B32D /* VisualComponent.swift */; };
 		A20A14E729693A6A0050B32D /* MainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20A14E629693A6A0050B32D /* MainGameScene.swift */; };
@@ -53,10 +53,10 @@
 		A20A14B92968F9580050B32D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A20A14BC2968F9580050B32D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A20A14C22968F9580050B32D /* GalaxyFortressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GalaxyFortressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A20A14C62968F9580050B32D /* GalaxyFortressTwoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressTwoTests.swift; sourceTree = "<group>"; };
+		A20A14C62968F9580050B32D /* GalaxyFortressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressTests.swift; sourceTree = "<group>"; };
 		A20A14CC2968F9580050B32D /* GalaxyFortressUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GalaxyFortressUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A20A14D02968F9580050B32D /* GalaxyFortressTwoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressTwoUITests.swift; sourceTree = "<group>"; };
-		A20A14D22968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressTwoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A20A14D02968F9580050B32D /* GalaxyFortressUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressUITests.swift; sourceTree = "<group>"; };
+		A20A14D22968F9580050B32D /* GalaxyFortressUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalaxyFortressUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A20A14DF2968F9E20050B32D /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		A20A14E4296932100050B32D /* VisualComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualComponent.swift; sourceTree = "<group>"; };
 		A20A14E629693A6A0050B32D /* MainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameScene.swift; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 		A20A14C52968F9580050B32D /* GalaxyFortressTests */ = {
 			isa = PBXGroup;
 			children = (
-				A20A14C62968F9580050B32D /* GalaxyFortressTwoTests.swift */,
+				A20A14C62968F9580050B32D /* GalaxyFortressTests.swift */,
 			);
 			path = GalaxyFortressTests;
 			sourceTree = "<group>";
@@ -139,8 +139,8 @@
 		A20A14CF2968F9580050B32D /* GalaxyFortressUITests */ = {
 			isa = PBXGroup;
 			children = (
-				A20A14D02968F9580050B32D /* GalaxyFortressTwoUITests.swift */,
-				A20A14D22968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift */,
+				A20A14D02968F9580050B32D /* GalaxyFortressUITests.swift */,
+				A20A14D22968F9580050B32D /* GalaxyFortressUITestsLaunchTests.swift */,
 			);
 			path = GalaxyFortressUITests;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20A14C72968F9580050B32D /* GalaxyFortressTwoTests.swift in Sources */,
+				A20A14C72968F9580050B32D /* GalaxyFortressTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,8 +318,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20A14D12968F9580050B32D /* GalaxyFortressTwoUITests.swift in Sources */,
-				A20A14D32968F9580050B32D /* GalaxyFortressTwoUITestsLaunchTests.swift in Sources */,
+				A20A14D12968F9580050B32D /* GalaxyFortressUITests.swift in Sources */,
+				A20A14D32968F9580050B32D /* GalaxyFortressUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

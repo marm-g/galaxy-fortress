@@ -32,7 +32,8 @@ class MainGameScene: SKScene {
 
     func createSceneContents() {
         state = GameState()
-        currentPlayerLabel = createTextLabel(text: "Current Player: " + state.activePlayer!.name, pos: CGPoint(x: 200, y: 650))
+        let currentPlayer = state.players[state.activePlayer]
+        currentPlayerLabel = createTextLabel(text: "Current Player: " + currentPlayer.name, pos: CGPoint(x: 200, y: 650))
         dice1 = createDiceEntity(pos: CGPoint(x: 400, y: 500))
         dice2 = createDiceEntity(pos: CGPoint(x: 500, y: 500))
         // Adding them as entities, but the visual components won't get rendered until

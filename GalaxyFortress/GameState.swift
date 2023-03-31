@@ -16,6 +16,7 @@ enum RollChoice {
 
 class GameState: ObservableObject {
     var players: [Player]
+    var turnCounter = 0
     var lastRoll: (Int, Int) = (0, 0)
     // rollingPlayer is the player who is currently the "dice roller"
     // activePlayer is the one who should be taking actions on the device
@@ -28,25 +29,59 @@ class GameState: ObservableObject {
     }
     
     func assignFirstPlayer() {
-        self.rollingPlayer = self.players.randomElement()!
-        self.activePlayer = self.rollingPlayer
-    }
+        players = players.shuffled()
+        rollingPlayer = 0
+        activePlayer = 0
+    }	
     
     static func printRoll(r: Roll) -> String {
         return "(" + String(r.0) + "," + String(r.1) + ")"
     }
     
+    // TODO(reno): Need a new function here that does a few things:
+    // * Figures out whose turn it is, and if they have actions to take
+    // (if you don't have any actions to take, mostly when you're not rolling, you can just be skipped)
+    // * Advances the turn to the next player
+    // * Figures out when a turn is done, and when a new roll needs to occur.
+    // Keeping doTurn separate seems nice because we can test pretty easily - the rolls are manually
+    // settable, and we can just call doTurn for resources and such to update
+    
     func doTurn (choice: RollChoice) {
-        let sector1 = activePlayer.cards[lastRoll.0 - 1]
-        // TODO(reno): Make these 'Equatable' so we can just do player == activePlayer
-        if activePlayer.name == rollingPlayer.name {
-            print(sector1?.activeCard.mainAction)
+        var vals: [Int] = []
+        if choice == .separate {
+            vals.append(lastRoll.0)
+            vals.append(lastRoll.1)
         } else {
-            for card in sector1!.flippedCards {
-                print(card.flippedAction)
+            vals.append(lastRoll.0 + lastRoll.1)
+        }
+        // TODO(reno): Make these 'Equatable' so we can just do player == activePlayer
+        for val in vals {
+            let sector = players[activePlayer].cards[val]
+            if players[activePlayer].name == players[rollingPlayer].name {
+                doAction(action: (sector?.activeCard.mainAction)!)
+            } else {
+                for card in sector!.flippedCards {
+                    doAction(action: card.mainAction)
+                }
             }
         }
-        
+    }
+    
+    func doAction (action: Action) {
+        switch action {
+        case is BasicAction:
+            let basicAction = action as! BasicAction
+            let activePlayer = players[activePlayer]
+            if (basicAction.resource == .credit) {
+                activePlayer.credits += basicAction.amount
+            } else if (basicAction.resource == .income) {
+                activePlayer.income += basicAction.amount
+            } else if (basicAction.resource == .victoryPoint) {
+                activePlayer.victoryPoints += basicAction.amount
+            }
+        default:
+            print("bad")
+        }
     }
     
     init(players: [Player]) {
@@ -74,6 +109,12 @@ class Player {
     // cards for the "flipped" ones.
     var cards: [Int: Sector]
     
+    func addCard(card: Card) {
+        let oldCard = cards[card.sector]?.activeCard
+        cards[card.sector]?.flippedCards.append(oldCard!)
+        cards[card.sector]?.activeCard = card
+    }
+    
     init(name: String, cards: [Int: Sector], credits: Int = 0, income: Int = 0, victoryPoints: Int = 0) {
         self.name = name
         self.credits = credits
@@ -94,6 +135,7 @@ class Sector {
 }
 
 class Card {
+    // TODO(reno): add cost here
     var mainAction: Action
     var flippedAction: Action
     var sector: Int // TODO(reno): these can only be 1-12, specify this somehow
@@ -164,6 +206,12 @@ let starterCard9 = Card(mainAction: oneIncome, flippedAction: threeCredits, sect
 let starterCard10 = Card(mainAction: oneIncome, flippedAction: threeCredits, sector: 10, id: 10, name: "Starter Card 10")
 let starterCard11 = Card(mainAction: oneIncome, flippedAction: fourCredits, sector: 11, id: 11, name: "Starter Card 11")
 let starterCard12 = Card(mainAction: oneIncome, flippedAction: fiveCredits, sector: 12, id: 12, name: "Starter Card 12")
+
+// TODO(reno): this could go into a database of some kind
+let cards = [
+    13: Card(mainAction: oneCredit, flippedAction: oneCredit, sector: 1, id: 13, name: "One Credit Sector One"),
+    14: Card(mainAction: fiveCredits, flippedAction: oneCredit, sector: 2, id: 14, name: "Five Credit Sector Two")
+]
 
 let starterDeck = [
     1: Sector(active: starterCard1),
